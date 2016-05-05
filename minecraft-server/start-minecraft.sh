@@ -21,16 +21,16 @@ fi
 echo "Checking version information."
 case "X$VERSION" in
   X|XLATEST|Xlatest)
-    VANILLA_VERSION=`curl -sSL https://s3.amazonaws.com/Minecraft.Download/versions/versions.json | jq -r '.latest.release'`
+    VANILLA_VERSION=`curl -sSL http://78rc4m.com1.z0.glb.clouddn.com/mc/versions.json | jq -r '.latest.release'`
   ;;
   XSNAPSHOT|Xsnapshot)
-    VANILLA_VERSION=`curl -sSL https://s3.amazonaws.com/Minecraft.Download/versions/versions.json | jq -r '.latest.snapshot'`
+    VANILLA_VERSION=`curl -sSL http://78rc4m.com1.z0.glb.clouddn.com/mc/versions.json | jq -r '.latest.snapshot'`
   ;;
   X[1-9]*)
     VANILLA_VERSION=$VERSION
   ;;
   *)
-    VANILLA_VERSION=`curl -sSL https://s3.amazonaws.com/Minecraft.Download/versions/versions.json | jq -r '.latest.release'`
+    VANILLA_VERSION=`curl -sSL http://78rc4m.com1.z0.glb.clouddn.com/mc/versions.json | jq -r '.latest.release'`
   ;;
 esac
 
@@ -130,7 +130,7 @@ function installVanilla {
 
   if [ ! -e $SERVER ]; then
     echo "Downloading $SERVER ..."
-    wget -q https://s3.amazonaws.com/Minecraft.Download/versions/$VANILLA_VERSION/$SERVER
+    wget -q http://78rc4m.com1.z0.glb.clouddn.com/mc/$SERVER
   fi
 }
 
@@ -287,8 +287,8 @@ if [ ! -e server.properties ]; then
         ;;
       *)
         echo "Invalid LEVEL_TYPE: $LEVEL_TYPE"
-	exit 1
-	;;
+  exit 1
+  ;;
     esac
   fi
 
@@ -368,10 +368,10 @@ fi
 
 # Make sure files exist to avoid errors
 if [ ! -e banned-players.json ]; then
-	echo '' > banned-players.json
+  echo '' > banned-players.json
 fi
 if [ ! -e banned-ips.json ]; then
-	echo '' > banned-ips.json
+  echo '' > banned-ips.json
 fi
 
 # If any modules have been provided, copy them over
